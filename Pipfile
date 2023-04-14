@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+soundfile = "*"
+torch = "*"
+torchaudio = "*"
+transformers = "*"
+pyaudio = "*"
+webrtcvad = "*"
+rx = "*"
+halo = "*"
+onnx = "*"
+onnxruntime = "*"
+pyctcdecode = "*"
+kenlm = {file = "https://github.com/kpu/kenlm/archive/master.zip"}
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
