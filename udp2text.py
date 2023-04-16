@@ -15,19 +15,38 @@ UDP_PORT = 2000
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
 
+import pyaudio
+ 
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 16000
+# RATE = 19000
+# A frame must be either 10, 20, or 30 ms in duration for webrtcvad
+FRAME_DURATION = 30
+# FRAMES_PER_BUFFER = 3200
+FRAMES_PER_BUFFER = int(RATE * FRAME_DURATION / 1000)
+RECORD_SECONDS = 50
+
 # Configurar PyAudio para la captura de audio en tiempo real
 audio = pyaudio.PyAudio()
-stream = audio.open(format=pyaudio.paInt16, channels=1, rate=200000, input=True, frames_per_buffer=2048)
+stream = audio.open(format=FORMAT,
+   channels=CHANNELS,
+   rate=RATE,
+   input=True,
+   frames_per_buffer=FRAMES_PER_BUFFER)
 
 # Transcribir el audio en tiempo real
-while True:
-    data, addr = sock.recvfrom(2048)
+data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
+
+while data != '':
+    #stream.write(data)
     audio_tensor = torch.from_numpy(np.frombuffer(data, dtype=np.int16)).float()
     input_values = tokenizer(audio_tensor, return_tensors="pt").input_values
     logits = model(input_values).logits
     predicted_ids = torch.argmax(logits, dim=-1)
     transcription = tokenizer.batch_decode(predicted_ids)[0]
     print(transcription)
+    data, addr = sock.recvfrom(2048)
 
 stream.stop_stream()
 stream.close()
