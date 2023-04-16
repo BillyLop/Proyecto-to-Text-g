@@ -17,11 +17,11 @@ sock.bind((UDP_IP, UDP_PORT))
 
 # Configurar PyAudio para la captura de audio en tiempo real
 audio = pyaudio.PyAudio()
-stream = audio.open(format=pyaudio.paInt16, channels=1, rate=125000, input=True, frames_per_buffer=1024)
+stream = audio.open(format=pyaudio.paInt16, channels=1, rate=200000, input=True, frames_per_buffer=2048)
 
 # Transcribir el audio en tiempo real
 while True:
-    data, addr = sock.recvfrom(1024)
+    data, addr = sock.recvfrom(2048)
     audio_tensor = torch.from_numpy(np.frombuffer(data, dtype=np.int16)).float()
     input_values = tokenizer(audio_tensor, return_tensors="pt").input_values
     logits = model(input_values).logits
