@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import asyncio
 import tornado.web
 from tornado.ioloop import IOLoop
 from tornado.options import define, options
@@ -8,18 +9,11 @@ from tornado.web import StaticFileHandler
 from tornado.web import RequestHandler
 from tornado.websocket import WebSocketHandler
 from tornado.escape import json_decode
-#import librosa
-#import torch
-#  from transformers import Wav2Vec2ForCTC, Wav2Vec2Tokenizer, Wav2Vec2CTCTokenizer, Wav2Vec2Processor
-#
+import speech_recognition as sr
+from speechrecognizer import *
+import time 
 import IPython.display as display
 
-
-# manejo de audio
-#import librosa
-#import torch
-#from transformers import Wav2Vec2ForCTC, Wav2Vec2Tokenizer
-import speech_recognition as sr
 
 # config options
 define('port', default=8080, type=int, help='port to run web server on')#definición del puerto
@@ -100,70 +94,11 @@ class DirectoryHandler(StaticFileHandler):
 class RSConnectionSocket(WebSocketHandler):
   clients = []
 
-  def testAudio(self):
-    # Loading the audio file
-    #filename = "/home/popuser/Downloads/SDR-course-material-2023/Laboratory/Lab_03/Receiver/data/audio.wav"
-    #filename = "./webServer/test_grab.wav"
-    # sr = librosa.get_samplerate (filename) #sample rate
-    # audio, rate = librosa.load(filename, sr=19000)
-    # print("audio tipo")
-    # print(type(audio))
-    # print(audio)
-    # stream = librosa.stream(filename, block_length = 19000, frame_length =2048, hop_length = 1024) 
-    # # Importing Wav2Vec pretrained model
-    # tokenizer = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-large-xlsr-53-spanish")
-    # model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-large-xlsr-53-spanish")
-    # for parteaudio in stream:
-    #     print("entra al for")
-    #     print("data")
-    #     print(type(parteaudio))
-    #     print(parteaudio)
-    #     dataaudio = librosa.stft(parteaudio, center = False)
-    #     print("data_audio")
-    #     print(type(dataaudio))
-    #     print(dataaudio)
-    #     #print("rate")
-    #     #print(sr)
-    #     #if len(parteaudio.shape) > 1:
-    #     #   parteaudio = parteaudio[:, 0] + parteaudio[:, 1]
-
-    #     # Taking an input value
-    #     input_values = tokenizer(parteaudio, return_tensors = "pt").input_values
-    #     # Storing logits (non-normalized prediction values)
-    #     logits = model(input_values).logits
-    #     # Storing predicted ids
-    #     prediction = torch.argmax(logits, dim = -1)
-    #     # Passing the prediction to the tokenzer decode to get the transcription
-    #     transcription = tokenizer.batch_decode(prediction)[0]
-    #     # Printing the transcription
-    #     print(transcription)
-    r = sr.Recognizer()
-    m = sr.Microphone()
-
-    try:
-        print("A moment of silence, please...")
-        with m as source: r.adjust_for_ambient_noise(source)
-        print("Set minimum energy threshold to {}".format(r.energy_threshold))
-        while True:
-            print("Say something!")
-            with m as source: audio = r.listen(source)
-            print("Got it! Now to recognize it...")
-            try:
-                # recognize speech using Google Speech Recognition
-                value = r.recognize_google(audio, language="es")
-
-                # we need some special handling here to correctly print unicode characters to standard output
-                if str is bytes:  # this version of Python uses bytes for strings (Python 2)
-                    print(u"You said {}".format(value).encode("utf-8"))
-                else:  # this version of Python uses unicode for strings (Python 3+)
-                    print("You said {}".format(value))
-            except sr.UnknownValueError:
-                print("Oops! Didn't catch that")
-            except sr.RequestError as e:
-                print("Uh oh! Couldn't request results from Google Speech Recognition service; {0}".format(e))
-    except KeyboardInterrupt:
-        pass
-    return 'Hola Mundo'
+  async def testAudio(self):
+    mylist = range(3)
+    for i in mylist:
+        await asyncio.sleep(1)
+        yield i*i
 
   def check_origin(self, origin):
     return True
@@ -174,18 +109,18 @@ class RSConnectionSocket(WebSocketHandler):
     RSConnectionSocket.clients.append(self)
     print(RSConnectionSocket.clients) 
     
-  def on_message(self, message):
+  async def on_message(self, message):
     try:
       params = json_decode(message)
       requestPage = None
       data = {}
-      message = self.testAudio()
-      content = {
-        'status': 'OK',
-        'code': 200,
-        'message': message
-      }
-      self.write_message(content)
+      async for message in microphone_convertion(self):
+        content = {
+          'status': 'OK',
+          'code': 200,
+          'message': message
+        }
+        self.write_message(content)
       self.close()
     except Exception as exc:
         error, = exc.args
