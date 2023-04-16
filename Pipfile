@@ -16,6 +16,7 @@ onnx = "*"
 onnxruntime = "*"
 pyctcdecode = "*"
 kenlm = {file = "https://github.com/kpu/kenlm/archive/master.zip"}
+speechrecognition = "*"
 
 [dev-packages]
 
