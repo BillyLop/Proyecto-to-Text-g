@@ -1,4 +1,4 @@
-# Reconocimiento de vos automático con speech_recognition
+# Reconocimiento de voZ automático con speech_recognition
 
 Usar cualquier modelo de speech_recognition con micrófono.
 
