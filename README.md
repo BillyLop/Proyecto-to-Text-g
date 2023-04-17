@@ -25,6 +25,7 @@ Finalmente se puede probar el reconocimiento de voz:
 ```
 python __main__.py
 ```
+Para cerrar el servidor y detener el programa se utiliza Ctrl + C en la terminal del IDE en el cual se está ejecutando el programa.
 
 ### Posibles problemas:
 
