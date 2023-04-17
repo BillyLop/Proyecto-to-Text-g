@@ -2,7 +2,7 @@
 
 Este proyecto se desarrollo usando Python 3.8, se recomienda usar cualquier modelo de speech_recognition con micrófono.
 
-![demo video](./docs/FM2Text.mp4)
+![demo GIF](./docs/FM2Text.gif)
 
 ## Configuración
 
