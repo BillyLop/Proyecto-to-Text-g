@@ -1,5 +1,5 @@
 asyncio
 tornado
-speech_recognition 
+SpeechRecognition 
 time 
 ipython
