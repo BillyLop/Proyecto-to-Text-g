@@ -1,6 +1,6 @@
 # Reconocimiento de voz automático con speech_recognition
 
-Usar cualquier modelo de speech_recognition con micrófono.
+Este proyecto se desarrollo usando Python 3.8, se recomeinda usar cualquier modelo de speech_recognition con micrófono.
 
 ## Configuración
 
@@ -19,11 +19,11 @@ python __main__.py
 
 ### Posibles problemas:
 
-* Inestabilidad de reconocimiento de voz debido a la calidad de la señal de audio. 
+* Sensibilidad a la dicción del hablante y a la legibilidad del audio. 
 
 * Al utilizar el micrófono se requiere de un ambiente tranquilo para evitar interferencias de audio. 
 
-* Tiempo de reconocimiento de voz y conversión a texto. 
+* Demora en el tiempo de reconocimiento de voz y conversión a texto. 
 
 
 ## Manejo
