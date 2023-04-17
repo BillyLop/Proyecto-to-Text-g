@@ -133,7 +133,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [441, 411]
+    coordinate: [460, 408]
     rotation: 0
     state: enabled
 - name: audio_sink_0
@@ -150,7 +150,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1051, 415]
+    coordinate: [1070, 412]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_vxx_0
@@ -168,7 +168,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [661, 419]
+    coordinate: [680, 416]
     rotation: 0
     state: enabled
 - name: limesdr_source_0
@@ -203,7 +203,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1, 318]
+    coordinate: [20, 315]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0
@@ -227,7 +227,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [216, 286]
+    coordinate: [235, 283]
     rotation: 0
     state: enabled
 - name: note_0
@@ -320,7 +320,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [470, 234]
+    coordinate: [489, 231]
     rotation: 0
     state: enabled
 - name: rational_resampler_xxx_0
@@ -340,7 +340,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [851, 293]
+    coordinate: [870, 290]
     rotation: 0
     state: enabled
 

@@ -183,7 +183,6 @@ class top_block(gr.top_block, Qt.QWidget):
 
 
         self.limesdr_source_0.calibrate(signal_bandwidth, 0)
-        self.blocks_udp_sink_0 = blocks.udp_sink(gr.sizeof_float*1, '192.168.1.12', 2000, 1472, True)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_ff(volume*2)
         self.audio_sink_0 = audio.sink(22050, '', True)
         self.analog_wfm_rcv_0 = analog.wfm_rcv(
@@ -202,7 +201,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.low_pass_filter_0, 0), (self.analog_wfm_rcv_0, 0))
         self.connect((self.low_pass_filter_0, 0), (self.qtgui_freq_sink_x_0, 0))
         self.connect((self.rational_resampler_xxx_0, 0), (self.audio_sink_0, 0))
-        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_udp_sink_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")

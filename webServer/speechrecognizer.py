@@ -6,11 +6,14 @@ async def microphone_convertion (self):
   m = sr.Microphone()
 
   try:
-      with m as source: r.adjust_for_ambient_noise(source, duration=0.01)
+      with m as source: r.adjust_for_ambient_noise(source)
+      # with m as source: r.adjust_for_ambient_noise(source, duration=0.01)
       while True:
-          print("Say something!")
+          print("Escuchando dialogo!")
+          yield '**Escuchando dialogo!'
           with m as source: audio = r.listen(source)
-          print("Got it! Now to recognize it...")
+          print("Intentando reconocimiento de dialogo...")
+          yield '**Intentando reconocimiento de dialogo...'
           try:
               # recognize speech using Google Speech Recognition
               value = r.recognize_google(audio, language="es")

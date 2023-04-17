@@ -10,7 +10,14 @@ Se recomienda instalar este proyecto en un ambiente virtual.
 pipenv shell
 pip install -r requirements.txt
 ```
+Para ejecutar GNU radio y levantar el servidor web puede utilizar el comando:
 
+```
+./run.sh
+```
+Debe ejecutarse desde el directorio raíz del proyecto.
+
+Alternativamente se puede correr por separado y de forma manual.
 Finalmente se puede probar el reconocimiento de voz:
 
 ```

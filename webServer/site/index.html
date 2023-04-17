@@ -16,34 +16,58 @@
           FM2Text Project</h1>
         <p class="max-w-2xl mb-6 font-light text-white lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">From
           IA over telecomunication...</p>
-        <a href="#"
-          class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-800 bg-gray-500 rounded-lg hover:bg-gray-400 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-cyan-600 dark:focus:ring-gray-800"
-          onclick="WebSocketCommunication()">
-          FM Speak
-        </a>
+        <div class="flex w-full gap-2">
+          <a href="#"
+            class="inline-flex w-32 items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-800 bg-gray-500 rounded-lg hover:bg-gray-400 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-cyan-600 dark:focus:ring-gray-800"
+            onclick="WebSocketCommunication()">
+            FM Speak
+          </a>
+          <div
+            class="invisible w-64 bg-blue-100 border border-blue-400 text-blue-700 ml-2 px-4 py-3 rounded relative my-5"
+            role="alert"
+            id="alertabox"
+          >
+            <!-- <strong class="font-bold">Alert!</strong> -->
+            <div class="block sm:inline" id="alerta"></div>
+          </div>
+        </div>
         <div id="mensajes"
-          class="max-w-2xl mt-6 mb-6 font-light text-white lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+          class="max-w-2xl h-48 overscroll-contain overflow-auto mt-6 mb-6 font-light text-white lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
           ...
         </div>
       </div>
-      <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+      <div class="hidden lg:mt-0 lg:col-span-5 lg:flex h-96">
         <img src="http://www.residencestyle.com/wp-content/uploads/2019/07/Benefits-of-Audio-to-Text-Converter-Online.png" alt="mockup">
       </div>
     </div>
   </section>
   <script type="text/javascript">
+    //Muestra el diálogo en texto
     function showMessages(text) {
+      var elemAlerta = document.getElementById("alertabox");
+      if (elemAlerta.classList.contains("invisible") === false) {
+        elemAlerta.classList.add("invisible");
+      }
       var elem = document.getElementById("mensajes");
-      elem.innerText = elem.innerText + text;
+      elem.innerText = elem.innerText + ' ' + text;
+      //elem.innerText = text;
     }
-
+    //Muestra alerta
+    function showAlert(text) {
+      var elemAlerta = document.getElementById("alertabox");
+      elemAlerta.classList.remove("invisible");
+      var elem = document.getElementById("alerta");
+      elem.innerText = text;
+      //elem.innerText = text;
+    }
+    //Establece la comunicación por socket
     function WebSocketCommunication() {
 
       if ("WebSocket" in window) {
         alert("WebSocket is supported by your Browser!");
 
         // Let us open a web socket
-        var ws = new WebSocket("ws://192.168.1.12:8080/echo");
+        var ws = new WebSocket("ws://0.0.0.0:8080/echo");
 
         ws.onopen = function () {
 
@@ -51,12 +75,16 @@
           ws.send(JSON.stringify({
             message: "Enviando mensaje"
           }));
-          showMessages("Message is sent...");
+          showMessages("...");
         };
 
         ws.onmessage = function (evt) {
           var received_msg = JSON.parse(evt.data);
-          showMessages(received_msg.message);
+          if (received_msg.message.includes('**Escuchando dialogo!') || received_msg.message.includes('**Intentando reconocimiento de dialogo...')) {
+            showAlert(received_msg.message);
+          } else {
+            showMessages(received_msg.message);
+          }
         };
 
         ws.onclose = function () {

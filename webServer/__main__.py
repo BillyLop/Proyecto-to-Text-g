@@ -16,7 +16,7 @@ import time
 import IPython.display as display
 
 
-# config options
+# Configuración de puesto del servidor web
 define('port', default=8080, type=int, help='port to run web server on')
 define('debug', default=True, help='start app in debug mode')
 define('route_to_index', default=False, help='route all requests to index.html')
@@ -26,7 +26,7 @@ PORT = options.port
 DEBUG = options.debug
 ROUTE_TO_INDEX = options.route_to_index
 
-
+#Muestra la página web
 class DirectoryHandler(StaticFileHandler):
     def validate_absolute_path(self, root, absolute_path):
         if ROUTE_TO_INDEX and self.request.uri != '/' and not '.' in self.request.uri:
@@ -92,6 +92,7 @@ class DirectoryHandler(StaticFileHandler):
 
         return super(DirectoryHandler, cls).get_content(abspath, start=start, end=end)
 
+#Realiza la conexión por socket
 class RSConnectionSocket(WebSocketHandler):
   clients = []
 
@@ -138,7 +139,7 @@ class RSConnectionSocket(WebSocketHandler):
   def on_close(self):
     # clients must be accessed through class object!!!
     RSConnectionSocket.clients.remove(self)
-
+#Inicio del servidor tornado
 settings = {
     'debug': DEBUG,
     'gzip': True,
