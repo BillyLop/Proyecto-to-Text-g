@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#Importación de librerias
 import os
 import asyncio
 import tornado.web
@@ -16,7 +17,7 @@ import IPython.display as display
 
 
 # config options
-define('port', default=8080, type=int, help='port to run web server on')#definición del puerto
+define('port', default=8080, type=int, help='port to run web server on')
 define('debug', default=True, help='start app in debug mode')
 define('route_to_index', default=False, help='route all requests to index.html')
 options.parse_command_line(final=True)

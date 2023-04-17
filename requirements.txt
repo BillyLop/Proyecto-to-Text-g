@@ -1,13 +1,6 @@
-soundfile
-torch
-torchaudio
-transformers
-pyaudio
-webrtcvad
-rx
-halo
-onnx
-onnxruntime
-wheel
-pyctcdecode
-https://github.com/kpu/kenlm/archive/master.zip
+ os
+ asyncio
+ tornado
+ speech_recognition 
+ time 
+ IPython.display as display

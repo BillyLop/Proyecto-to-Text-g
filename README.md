@@ -1,57 +1,35 @@
-# automatic speech recognition with wav2vec2 
+# Reconocimiento de vos automático con speech_recognition
 
-Use any wav2vec model with a microphone.
+Usar cualquier modelo de speech_recognition con micrófono.
 
-![demo gif](./docs/wav2veclive.gif)
+## Configuración
 
-## Setup
-
-I recommend to install this project in a virtual environment.
+Se recomienda instalar este proyecto en un ambiente virtual.
 
 ```
-python3 -m venv ./venv
-source ./venv/bin/activate
+pipenv shell
 pip install -r requirements.txt
-```
-
-Depending on linux distribution you might encounter an **error that portaudio was not found** when installing pyaudio. For Ubuntu you can solve that issue by installing the "portaudio19-dev" package.
 
 ```
-sudo apt install portaudio19-dev
-```
 
-Finally you can test the speech recognition:
+Finalmente se puede probar el reconocimiento de voz:
 
 ```
-python live_asr.py
+python __main__.py
 ```
 
-### Possible Issues:
+### Posibles problemas:
 
-* The code uses the systems default audio device. Please make sure that you set your systems default audio device correctly. 
+* Inestabilidad de reconocimiento de voz debido a la calidad de la señal de audio. 
 
-* "*attempt to connect to server failed*" you can safely ignore this message from pyaudio. It just means, that pyaudio can't connect to the jack audio server. 
+* Tiempo de reconocimiento de voz y conversión a texto. 
 
 
-## Usage
+## Manejo
 
-You can use any **wav2vec2** model from the [huggingface model hub](https://huggingface.co/models?pipeline_tag=automatic-speech-recognition&search=wav2vec2). Just set the model name, all files will be downloaded on first execution.
+Se puede cambiar el idioma de reconocimiento de voz en el parámetro de Language
 
-```python 
-from live_asr import LiveWav2Vec2
+```
+value = r.recognize_google(audio, language="es")
 
-english_model = "facebook/wav2vec2-large-960h-lv60-self"
-spanish_model = "facebook/wav2vec2-large-xlsr-53-spanish"
-asr = LiveWav2Vec2(spanish_model,device_name="default")
-asr.start()
-
-try:        
-    while True:
-        text,sample_length,inference_time = asr.get_last_text()                        
-        print(f"{sample_length:.3f}s"
-        +f"\t{inference_time:.3f}s"
-        +f"\t{text}")
-        
-except KeyboardInterrupt:   
-    asr.stop()  
 ```
