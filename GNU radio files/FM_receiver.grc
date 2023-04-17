@@ -83,7 +83,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [648, 13]
+    coordinate: [766, 17]
     rotation: 0
     state: enabled
 - name: signal_bandwidth
@@ -95,7 +95,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [480, 12]
+    coordinate: [624, 15]
     rotation: 0
     state: enabled
 - name: volume
@@ -116,7 +116,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 108]
+    coordinate: [480, 13]
     rotation: 0
     state: enabled
 - name: analog_wfm_rcv_0
@@ -133,7 +133,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [400, 603]
+    coordinate: [441, 411]
     rotation: 0
     state: enabled
 - name: audio_sink_0
@@ -150,7 +150,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [898, 482]
+    coordinate: [1051, 415]
     rotation: 0
     state: enabled
 - name: blocks_multiply_const_vxx_0
@@ -168,26 +168,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [622, 534]
-    rotation: 0
-    state: enabled
-- name: blocks_udp_sink_0
-  id: blocks_udp_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    eof: 'True'
-    ipaddr: 192.168.1.12
-    port: '2000'
-    psize: '1472'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [905, 232]
+    coordinate: [661, 419]
     rotation: 0
     state: enabled
 - name: limesdr_source_0
@@ -222,7 +203,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 243]
+    coordinate: [1, 318]
     rotation: 0
     state: enabled
 - name: low_pass_filter_0
@@ -246,7 +227,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [206, 346]
+    coordinate: [216, 286]
     rotation: 0
     state: enabled
 - name: note_0
@@ -259,7 +240,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [760, 12]
+    coordinate: [866, 20]
     rotation: 0
     state: enabled
 - name: qtgui_freq_sink_x_0
@@ -339,7 +320,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [422, 167]
+    coordinate: [470, 234]
     rotation: 0
     state: enabled
 - name: rational_resampler_xxx_0
@@ -359,7 +340,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [701, 355]
+    coordinate: [851, 293]
     rotation: 0
     state: enabled
 
@@ -370,7 +351,6 @@ connections:
 - [low_pass_filter_0, '0', analog_wfm_rcv_0, '0']
 - [low_pass_filter_0, '0', qtgui_freq_sink_x_0, '0']
 - [rational_resampler_xxx_0, '0', audio_sink_0, '0']
-- [rational_resampler_xxx_0, '0', blocks_udp_sink_0, '0']
 
 metadata:
   file_format: 1
