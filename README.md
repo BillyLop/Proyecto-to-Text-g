@@ -1,6 +1,6 @@
 # Reconocimiento de voz automático con speech_recognition
 
-Este proyecto se desarrollo usando Python 3.8, se recomeinda usar cualquier modelo de speech_recognition con micrófono.
+Este proyecto se desarrollo usando Python 3.8, se recomienda usar cualquier modelo de speech_recognition con micrófono.
 
 ![demo video](./docs/FM2Text.mp4)
 
