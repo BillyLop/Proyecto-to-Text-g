@@ -16,7 +16,7 @@ async def microphone_convertion (self):
           yield '**Intentando reconocimiento de dialogo...'
           try:
               # recognize speech using Google Speech Recognition
-              value = r.recognize_google(audio, language="es")
+              value = r.recognize_google(audio, language="es-MX")
 
               # we need some special handling here to correctly print unicode characters to standard output
               if str is bytes:  # this version of Python uses bytes for strings (Python 2)
