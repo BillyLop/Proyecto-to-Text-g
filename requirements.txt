@@ -1,6 +1,5 @@
- os
- asyncio
- tornado
- speech_recognition 
- time 
- ipython
+asyncio
+tornado
+speech_recognition 
+time 
+ipython
