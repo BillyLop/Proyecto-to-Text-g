@@ -3,4 +3,4 @@
  tornado
  speech_recognition 
  time 
- IPython.display
+ ipython
