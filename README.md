@@ -21,6 +21,8 @@ python __main__.py
 
 * Inestabilidad de reconocimiento de voz debido a la calidad de la señal de audio. 
 
+* Al utilizar el micrófono se requiere de un ambiente tranquilo para evitar interferencias de audio. 
+
 * Tiempo de reconocimiento de voz y conversión a texto. 
 
 
